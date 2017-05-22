@@ -2,6 +2,7 @@
 
 const form = document.getElementById("registrar");
 const input = form.querySelector("input");
+const ul = document.getElementById("invitedList");
 
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -14,10 +15,33 @@ form.addEventListener("submit", (e) => {
 
 	input.value = "";
 
-	const ul = document.getElementById("invitedList");
 	const li = document.createElement("li");
 	li.textContent = text;
+
+	// Create RSVP checkbox
+
+	const label = document.createElement("label");
+	label.textContent = "Confirmed";
+	const checkbox = document.createElement("input");
+	checkbox.type = "checkbox";
+	label.appendChild(checkbox);
+	li.appendChild(label);
+
 	ul.appendChild(li);
 });
 
 
+// Create a handler for the checkbox - when checked, add class of responded to the list item
+
+ul.addEventListener("change", (e) => {
+	const checkbox = event.target;
+	const checked = checkbox.checked;
+	const listItem = checkbox.parentNode.parentNode;
+
+	if (checked) {
+		listItem.className = "responded";
+	} else {
+		listItem.className = "";
+	}
+
+});
