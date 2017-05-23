@@ -1,73 +1,5 @@
 // Get name and store it to the console.
 
-// const form = document.getElementById("registrar");
-// const input = form.querySelector("input");
-// const ul = document.getElementById("invitedList");
-
-// form.addEventListener("submit", (e) => {
-// 	e.preventDefault();
-
-	// Add name to unordered list below the form
-
-	// const text = input.value;
-
-	// Clear form after name is submitted
-
-	// input.value = "";
-
-	// const li = document.createElement("li");
-	// li.textContent = text;
-
-	// Create RSVP checkbox
-
-	// const label = document.createElement("label");
-	// label.textContent = "Confirmed";
-	// const checkbox = document.createElement("input");
-	// checkbox.type = "checkbox";
-	// label.appendChild(checkbox);
-	// li.appendChild(label);
-
-	// Add a remove button and remove the name
-
-// 	const button = document.createElement("button");
-// 	button.textContent = "remove";
-// 	li.appendChild(button);
-
-// 	ul.appendChild(li);
-// });
-
-
-// Create a handler for the checkbox - when checked, add class of responded to the list item
-
-// ul.addEventListener("change", (e) => {
-// 	const checkbox = event.target;
-// 	const checked = checkbox.checked;
-// 	const listItem = checkbox.parentNode.parentNode;
-
-// 	if (checked) {
-// 		listItem.className = "responded";
-// 	} else {
-// 		listItem.className = "";
-// 	}
-
-// });
-
-// Create a handler for removing items
-
-// ul.addEventListener("click", (e) => {
-// 	if (e.target.tagName === "BUTTON") {
-// 		const li = e.target.parentNode;
-// 		const ul = li.parentNode;
-// 		ul.removeChild(li);
-// 	}
-// });
-
-
-
-//-----------------------------------------------------------------------------
-
-
-
 const form = document.getElementById("registrar");
 const input = form.querySelector("input");
 const ul = document.getElementById("invitedList");
@@ -83,9 +15,19 @@ function createLI(text) {
 	checkbox.type = "checkbox";
 	label.appendChild(checkbox);
 	li.appendChild(label);
-	const button = document.createElement("button");
-	button.textContent = "remove";
-	li.appendChild(button);
+
+	// Create an edit button
+
+	const editButton = document.createElement("button");
+	editButton.textContent = "edit";
+	li.appendChild(editButton);
+
+	// Create a remove button
+
+	const removeButton = document.createElement("button");
+	removeButton.textContent = "remove";
+	li.appendChild(removeButton);
+
 	return li;
 
 }
@@ -118,8 +60,12 @@ ul.addEventListener("change", (e) => {
 
 ul.addEventListener("click", (e) => {
 	if (e.target.tagName === "BUTTON") {
-		const li = e.target.parentNode;
-		const ul = li.parentNode;
-		ul.removeChild(li);
-	}
+			const button = e.target;
+			const li = button.parentNode;
+			const ul = li.parentNode;
+		if (button.textContent === "remove") {
+			ul.removeChild(li);
+	} else if (button.textContent === "edit") {
+    }
+  }
 });
