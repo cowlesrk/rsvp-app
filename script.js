@@ -2,7 +2,42 @@
 
 const form = document.getElementById("registrar");
 const input = form.querySelector("input");
+const mainDiv = document.querySelector(".main");
 const ul = document.getElementById("invitedList");
+
+// Create a checkbox to filter invitees who have not responded
+
+const div = document.createElement("div");
+const filterLabel = document.createElement("label");
+const filterCheckBox = document.createElement("input");
+
+filterLabel.textContent = 'Hide those who have not responded';
+filterCheckBox.type = "checkbox";
+div.appendChild(filterLabel);
+div.appendChild(filterCheckBox);
+mainDiv.insertBefore(div, ul);
+filterCheckBox.addEventListener("change", (e) => {
+	const isChecked = e.target.checked;
+	const lis = ul.children;
+	if (isChecked) {
+		for (let i = 0; i < lis.length; i += 1) {
+			let li = lis[i];
+			if (li.className === "responded") {
+				li.style.display = "";
+
+			} else {
+				li.style.display = "none";
+			}
+
+		}
+	} else {
+		for (let i = 0; i < lis.length; i += 1) {
+			let li = lis[i];
+			li.style.display = "";
+
+		}
+	}
+});
 
 // Create a function to get names and store to the console
 
@@ -85,7 +120,7 @@ ul.addEventListener("click", (e) => {
 		// Move list items to a saved state when the button is clicked
 
     } else if (button.textContent === "save") {
-		const ipnut = li.firstElementChild;
+		const input = li.firstElementChild;
 		const span = document.createElement("span");
 		span.textContent = input.value;
 		li.insertBefore(span, input);
